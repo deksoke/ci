@@ -1,0 +1,44 @@
+/*
+.pagination
+{
+    float:left;
+    width:700px;
+}
+.pagination strong
+{
+    padding:3px 5px;
+    border:1px solid #ccc;
+    background:#fff;
+    color:red;
+}
+.pagination a
+{
+    padding:3px 5px;
+    margin:2px;
+    border:1px solid #ccc;
+    background:#eee;
+    color:#FB7702;
+    text-decoration: none;
+}
+.pagination a:hover
+{
+    padding:3px 5px;
+    border:1px solid #ccc;
+    background:#f2f2f2;
+    color:red;
+}
+.pagination a:active
+{
+    padding:3px 5px;
+    border:1px solid #ccc;
+    background:#fff;
+    color:#FB7702;
+}
+*/
+
+.sb-page-header {
+    padding-top: 20px;
+    padding-bottom: 60px;
+    text-align: left;
+    font-size: 24px;
+}
