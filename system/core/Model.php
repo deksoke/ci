@@ -79,11 +79,69 @@ class CI_Model {
 
 }
 
-interface iModel
+interface iMy_CI_Model
 {
-	public function Get($id=null);
+	public function GetData($filter_or_id);
+	public function GetDataById($id);
+	public function GetCount($filter = null);
+	public function Insert($entity);
+	public function Update($id, $entity);
+	public function Delete($condition_or_id);
+}
 
-	public function Add($model);
-	public function Edit($model);
-	public function Del($model);
+class My_CI_Model extends CI_Model implements iMy_CI_Model {
+
+	protected $entityName = null;
+	protected $entityColId = null;
+
+	public function __construct($entityName, $entityColId)
+	{
+		parent::__construct();
+
+		$this->entityName = $entityName;
+		$this->entityColId = $entityColId;
+	}
+
+	public function GetData($filter = null)	{
+		if ($filter == null) {
+			//nothing to do
+
+		} else if (is_array($filter)) {
+			$this->db->where($filter);
+
+		} else {
+			$this->db->where($this->entityColId, $filter);
+		}
+		return $this->db->get($this->entityName)->result();
+	}
+
+	public function GetDataById($id) {
+		return $this->db->where($this->entityColId, $id)->get($this->entityName)->row();
+	}
+
+	public function GetCount($filter = null){
+		if ($filter != null)
+			$this->db->where($filter);
+
+		return $this->db->get($this->entityName)->num_rows();
+	}
+
+	public function Insert($entity)	{
+		$this->db->insert($this->entityName, $entity);
+	}
+
+	public function Update($id, $entity) {
+		$this->db->where($this->entityColId, $id);
+		$this->db->update($this->entityName, $entity);
+	}
+
+	public function Delete($condition)	{
+		if (is_array($condition)){
+			$this->db->where($condition);
+		} else {
+			$this->db->where($this->entityColId, $condition);
+		}
+		$this->db->delete($this->entityName);
+	}
+
 }

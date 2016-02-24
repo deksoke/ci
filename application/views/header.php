@@ -25,6 +25,9 @@
                             <a href="<?php echo base_url(); ?>member">Member</a>
                         </li>
                         <li class="<?php echo !$this->aauth->is_loggedin() ? 'hide' : ''; ?>">
+                            <a href="<?php echo base_url(); ?>bogies">Bogies</a>
+                        </li>
+                        <li class="<?php echo !$this->aauth->is_loggedin() ? 'hide' : ''; ?>">
                             <a href="<?php echo base_url(); ?>upload">Upload</a>
                         </li>
                         <li class="dropdown <?php echo !$this->aauth->is_loggedin() ? 'hide' : ''; ?>">

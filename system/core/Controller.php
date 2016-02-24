@@ -98,22 +98,27 @@ class CI_Controller {
 
 interface iMY_CI_Controller
 {
-	public function Get($id=null);
-	public function Add($entity);
-	public function Edit($id, $entity);
+	public function Get($id = null);
+	public function GetCount();
+	public function Insert($entity);
+	public function Update($id, $entity);
 	public function Delete($id);
 }
 
 class MY_CI_Controller extends CI_Controller implements iMY_CI_Controller
 {
-	private $entity_name = '';
-	private $identity_col = '';
+	protected $entity_name = '';
+	protected $identity_col = '';
 
 	function __construct($entityName, $identityCol)
 	{
 		parent::__construct();
 		$this->entity_name = $entityName;
 		$this->identity_col = $identityCol;
+	}
+
+	public function Now(){
+		return date("Y-m-d H:i:s");
 	}
 
 	public function Get($id = null)
@@ -138,14 +143,20 @@ class MY_CI_Controller extends CI_Controller implements iMY_CI_Controller
 		}
 	}
 
-	public function Add($entity)
+	public function GetCount()
+	{
+		// TODO: Implement GetCount() method.
+		return $this->db->count_all($this->entity_name);
+	}
+
+	public function Insert($entity)
 	{
 		// TODO: Implement Add() method.
 		$this->db->insert($this->entity_name, $entity);
 		return $this->db->insert_id();
 	}
 
-	public function Edit($id, $entity)
+	public function Update($id, $entity)
 	{
 		// TODO: Implement Edit() method.
 		$this->db->where($this->identity_col, $id)

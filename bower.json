@@ -4,5 +4,8 @@
   "main": "index.php",
   "moduleType": [],
   "license": "MIT",
-  "homepage": ""
+  "homepage": "",
+  "devDependencies": {
+    "angular": "~1.5.0"
+  }
 }
