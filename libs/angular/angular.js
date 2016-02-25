@@ -2857,7 +2857,7 @@ function JQLite(element) {
   }
   if (!(this instanceof JQLite)) {
     if (argIsString && element.charAt(0) != '<') {
-      throw jqLiteMinErr('nosel', 'Looking up elements via selectors is not supported by jqLite! See: http://docs.angularjs.org/api/angular.element');
+      throw jqLiteMinErr('nosel', 'Looking up elements via selectors is not supported by jqLite! See: http://docs.angularjs.org/apis/angular.element');
     }
     return new JQLite(element);
   }
@@ -3344,7 +3344,7 @@ forEach({
 
 function createEventHandler(element, events) {
   var eventHandler = function(event, type) {
-    // jQuery specific api
+    // jQuery specific apis
     event.isDefaultPrevented = function() {
       return event.defaultPrevented;
     };
@@ -5791,7 +5791,7 @@ function Browser(window, document, $log, $sniffer) {
   var outstandingRequestCount = 0;
   var outstandingRequestCallbacks = [];
 
-  // TODO(vojta): remove this temporary api
+  // TODO(vojta): remove this temporary apis
   self.$$completeOutstandingRequest = completeOutstandingRequest;
   self.$$incOutstandingRequestCount = function() { outstandingRequestCount++; };
 
@@ -5856,11 +5856,11 @@ function Browser(window, document, $log, $sniffer) {
    *
    * SETTER:
    * With at least one argument, this method sets url to new value.
-   * If html5 history api supported, pushState/replaceState is used, otherwise
+   * If html5 history apis supported, pushState/replaceState is used, otherwise
    * location.href/location.replace is used.
    * Returns its own instance to allow chaining
    *
-   * NOTE: this api is intended for use only by the $location service. Please use the
+   * NOTE: this apis is intended for use only by the $location service. Please use the
    * {@link ng.$location $location service} to change url.
    *
    * @param {string} url New url (when used as setter)
@@ -5999,7 +5999,7 @@ function Browser(window, document, $log, $sniffer) {
    *
    * The listener gets called with new url as parameter.
    *
-   * NOTE: this api is intended for use only by the $location service. Please use the
+   * NOTE: this apis is intended for use only by the $location service. Please use the
    * {@link ng.$location $location service} to monitor url changes in angular apps.
    *
    * @param {function(string)} listener Listener function to be called when url changes.
@@ -6012,7 +6012,7 @@ function Browser(window, document, $log, $sniffer) {
       // don't fire popstate when user change the address bar and don't fire hashchange when url
       // changed by push/replaceState
 
-      // html5 history api - popstate event
+      // html5 history apis - popstate event
       if ($sniffer.history) jqLite(window).on('popstate', cacheStateAndFireUrlChange);
       // hashchange event
       jqLite(window).on('hashchange', cacheStateAndFireUrlChange);
@@ -6028,7 +6028,7 @@ function Browser(window, document, $log, $sniffer) {
    * @private
    * Remove popstate and hashchange handler from window.
    *
-   * NOTE: this api is intended for use only by $rootScope.
+   * NOTE: this apis is intended for use only by $rootScope.
    */
   self.$$applicationDestroyed = function() {
     jqLite(window).off('hashchange popstate', cacheStateAndFireUrlChange);
@@ -9436,7 +9436,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
             $rootElement.length -= removeCount - 1;
 
             // If the replaced element is also the jQuery .context then replace it
-            // .context is a deprecated jQuery api, so we should set it only when jQuery set it
+            // .context is a deprecated jQuery apis, so we should set it only when jQuery set it
             // http://api.jquery.com/context/
             if ($rootElement.context === firstElementToRemove) {
               $rootElement.context = newNode;
@@ -11508,7 +11508,7 @@ $interpolateMinErr.throwNoconcat = function(text) {
   throw $interpolateMinErr('noconcat',
       "Error while interpolating: {0}\nStrict Contextual Escaping disallows " +
       "interpolations that concatenate multiple expressions when a trusted value is " +
-      "required.  See http://docs.angularjs.org/api/ng.$sce", text);
+      "required.  See http://docs.angularjs.org/apis/ng.$sce", text);
 };
 
 $interpolateMinErr.interr = function(text, err) {
@@ -12368,7 +12368,7 @@ function LocationHashbangUrl(appBase, appBaseNoFile, hashPrefix) {
 
 /**
  * LocationHashbangUrl represents url
- * This object is exposed as $location service when html5 history api is enabled but the browser
+ * This object is exposed as $location service when html5 history apis is enabled but the browser
  * does not support it.
  *
  * @constructor
@@ -15654,7 +15654,7 @@ function qFactory(nextTick, exceptionHandler) {
    * @kind function
    *
    * @description
-   * Creates a promise that is resolved as rejected with the specified `reason`. This api should be
+   * Creates a promise that is resolved as rejected with the specified `reason`. This apis should be
    * used to forward rejection in a chain of promises. If you are dealing with the last promise in
    * a promise chain, you don't need to worry about it.
    *
@@ -18057,7 +18057,7 @@ function $SceProvider() {
       throw $sceMinErr('iequirks',
         'Strict Contextual Escaping does not support Internet Explorer version < 11 in quirks ' +
         'mode.  You can fix this by adding the text <!doctype html> to the top of your HTML ' +
-        'document.  See http://docs.angularjs.org/api/ng.$sce for more information.');
+        'document.  See http://docs.angularjs.org/apis/ng.$sce for more information.');
     }
 
     var sce = shallowCopy(SCE_CONTEXTS);

@@ -322,7 +322,7 @@ $config['rest_key_column'] = 'key';
 | Specify the method used to limit the API calls
 |
 | Available methods are :
-| $config['rest_limits_method'] = 'API_KEY'; // Put a limit per api key
+| $config['rest_limits_method'] = 'API_KEY'; // Put a limit per apis key
 | $config['rest_limits_method'] = 'METHOD_NAME'; // Put a limit on method calls
 | $config['rest_limits_method'] = 'ROUTED_URL';  // Put a limit on the routed URL
 |
@@ -460,7 +460,7 @@ $config['rest_logs_json_params'] = FALSE;
 |
 |       $this->method['METHOD_NAME']['limit'] = [NUM_REQUESTS_PER_HOUR];
 |
-| See application/controllers/api/example.php for examples
+| See application/controllers/apis/example.php for examples
 */
 $config['rest_enable_limits'] = FALSE;
 

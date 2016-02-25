@@ -957,7 +957,7 @@ abstract class REST_Controller extends CI_Controller {
      */
     protected function _detect_api_key()
     {
-        // Get the api key name variable set in the rest config file
+        // Get the apis key name variable set in the rest config file
         $api_key_variable = $this->config->item('rest_key_name');
 
         // Work out the name of the SERVER entry based on config
@@ -1104,7 +1104,7 @@ abstract class REST_Controller extends CI_Controller {
         switch ($this->config->item('rest_limits_method'))
         {
           case 'API_KEY':
-            $limited_uri = 'api-key:' . (isset($this->rest->key) ? $this->rest->key : '');
+            $limited_uri = 'apis-key:' . (isset($this->rest->key) ? $this->rest->key : '');
             $limited_method_name = isset($this->rest->key) ? $this->rest->key : '';
             break;
 

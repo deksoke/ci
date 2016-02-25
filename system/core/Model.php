@@ -85,7 +85,7 @@ interface iMy_CI_Model
 	public function GetDataById($id);
 	public function GetCount($filter = null);
 	public function Insert($entity);
-	public function Update($id, $entity);
+	public function Update($entity);
 	public function Delete($condition_or_id);
 }
 
@@ -126,12 +126,17 @@ class My_CI_Model extends CI_Model implements iMy_CI_Model {
 		return $this->db->get($this->entityName)->num_rows();
 	}
 
+	public function GetEntityName()
+	{
+		return $this->entityName;
+	}
+
 	public function Insert($entity)	{
 		$this->db->insert($this->entityName, $entity);
 	}
 
-	public function Update($id, $entity) {
-		$this->db->where($this->entityColId, $id);
+	public function Update($entity) {
+		$this->db->where($this->entityColId, $entity->ID);
 		$this->db->update($this->entityName, $entity);
 	}
 

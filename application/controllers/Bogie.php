@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Bogies extends MY_CI_Controller {
+class Bogie extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,12 +21,13 @@ class Bogies extends MY_CI_Controller {
 
 	public function __construct()
 	{
-		parent::__construct("dt_bogies", "BOGIE_ID");
+		parent::__construct();
+		$this->load->model("Bogie_Model");
 	}
 
 	private function getData_Pagination($per_page, $segment)
 	{
-		return $this->db->select("*")->from($this->entity_name)->limit($per_page, $segment)->get()->result();
+		return $this->db->select("*")->from($this->Bogie_Model->GetEntityName())->limit($per_page, $segment)->get()->result();
 	}
 
 	public function index()
@@ -38,9 +39,9 @@ class Bogies extends MY_CI_Controller {
 
 		//load plug-in
 		$this->load->library('pagination');
-		$config['base_url'] = base_url()."bogies/index";
+		$config['base_url'] = base_url()."bogie/index";
 		$config['per_page'] = 10;
-		$config['total_rows'] = $this->GetCount();
+		$config['total_rows'] = $this->Bogie_Model->GetCount();
 
 		/*
 		$config["full_tag_open"] = "<div class='pagination'>";
@@ -62,7 +63,7 @@ class Bogies extends MY_CI_Controller {
 		$data['bogies'] = $this->getData_Pagination($config['per_page'], $this->uri->segment(3));
 
 		loadHeader();
-		$this->load->view('bogies/index', $data);
+		$this->load->view('bogie/index', $data);
 		loadFooter();
 	}
 
@@ -84,15 +85,15 @@ class Bogies extends MY_CI_Controller {
 					'CREATE_USER' => GetCurr_UserLoginID()
 			);
 
-			$this->Insert($data);
+			$this->Bogie_Model->Insert($data);
 
-			redirect('bogies', 'refresh');
+			redirect('bogie', 'refresh');
 			exit();
 		}
 
 		//get
 		loadHeader();
-		$this->load->view('bogies/add');
+		$this->load->view('bogie/add');
 		loadFooter();
 	}
 
@@ -110,26 +111,26 @@ class Bogies extends MY_CI_Controller {
 					'UPDATE_USER' => GetCurr_UserLoginID()
 			);
 
-			$this->Update($id, $data);
+			$this->Bogie_Model->Update($id, $data);
 
-			redirect('bogies', 'refresh');
+			redirect('bogie', 'refresh');
 			exit();
 		}
 
-		$bogie = $this->Get($id);
+		$bogie = $this->Bogie_Model->GetData($id);
 
 		loadHeader();
-		$this->load->view('bogies/edit', array('bogie' => $bogie));
+		$this->load->view('bogie/edit', array('bogie' => $bogie));
 		loadFooter();
 	}
 
 	public function del($id, $page = null)
 	{
-		$this->Delete($id);
+		$this->Bogie_Model->Delete($id);
 		if ($page == null){
-			redirect('bogies/index', 'refresh');
+			redirect('bogie/index', 'refresh');
 		} else {
-			redirect('bogies/index/' . $page, 'refresh');
+			redirect('bogie/index/' . $page, 'refresh');
 		}
 		exit();
 	}

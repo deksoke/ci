@@ -2252,7 +2252,7 @@ class Aauth {
 		$content = '';
 		if($this->config_vars['ddos_protection'] && $this->config_vars['recaptcha_active']){
 			if( ($this->config_vars['use_cookies'] == TRUE && $this->CI->input->cookie('reCAPTCHA', TRUE) == 'true') || ($this->config_vars['use_cookies'] == FALSE && $this->CI->session->tempdata('reCAPTCHA') == 'true') ){
-				$content .= "<script type='text/javascript' src='https://www.google.com/recaptcha/api.js'></script>";
+				$content .= "<script type='text/javascript' src='https://www.google.com/recaptcha/apis.js'></script>";
 				$siteKey = $this->config_vars['recaptcha_siteKey'];
 				$content .= "<div class='g-recaptcha' data-sitekey='{$siteKey}'></div>";
 			}

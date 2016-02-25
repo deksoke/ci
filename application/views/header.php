@@ -3,9 +3,9 @@
 <head>
 
     <meta charset="utf-8">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>css/style.css" />
-    <link rel="stylesheet" href="<?php echo base_url(); ?>libs/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?php echo base_url(); ?>css/paper.css" />
+    <link rel="stylesheet" href="<?php echo base_url('css/style.css'); ?>" />
+    <link rel="stylesheet" href="<?php echo base_url('libs/bootstrap/dist/css/bootstrap.min.css'); ?>" />
+    <link rel="stylesheet" href="<?php echo base_url('css/paper.css'); ?>" />
     <title><?php echo getHeaderTitle(); ?></title>
 </head>
 <body>

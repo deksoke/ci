@@ -35,8 +35,8 @@
 											echo "<td>".$m->BOGIE_NAME_TH."</td>";
 											echo "<td>".$m->BOGIE_NAME_EN."</td>";
 											echo "<td>";
-											echo anchor("bogies/edit/".$m->BOGIE_ID, "Edit")."&nbsp;/&nbsp;";
-											echo anchor("bogies/del/".$m->BOGIE_ID, "Del", array("onclick" => "javascript:return confirm('Do you want to delete data ?');"));
+											echo anchor("bogies/edit/".$m->ID, "Edit")."&nbsp;/&nbsp;";
+											echo anchor("bogies/del/".$m->ID, "Del", array("onclick" => "javascript:return confirm('Do you want to delete data ?');"));
 											echo "</td>";
 											echo "</tr>";
 											$no++;

@@ -6,7 +6,7 @@
     </head>
     <body>
         <div class="container" style="max-width:500px;">
-            <?php echo form_open("bogies/edit/".$this->uri->segment(3)); ?>
+            <?php echo form_open("bogie/edit/".$this->uri->segment(3)); ?>
 
             <div class="form-group">
                 <label for="member_name">ชื่อไทย : </label>
@@ -27,7 +27,7 @@
             </div>
 
             <div class="form-group">
-                <input class="btn btn-primary" type="submit" name="btsave" value="บันทึก"> &nbsp; <?php echo anchor("bogies", "ยกเลิก"); ?>
+                <input class="btn btn-primary" type="submit" name="btsave" value="บันทึก"> &nbsp; <?php echo anchor("bogie", "ยกเลิก"); ?>
             </div>
 
             <?php echo form_close(); ?>
