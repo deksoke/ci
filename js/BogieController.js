@@ -7,9 +7,8 @@ app.controller('BogieController', function ($scope, BogieService) {
     bg.title = "Bogie";
     bg.bogies = [];
 
-    getBogies();
-
-    function getBogies() {
+    $scope.getBogieLists = function () {
+        bg.bogies = [];
         BogieService.GetData()
             .success(function (data) {
                 bg.bogies = data;
@@ -17,34 +16,39 @@ app.controller('BogieController', function ($scope, BogieService) {
             .error(function (error) {
                 $scope.status = 'Unable to load data: ' + error.message;
             });
-    }
+    };
 
-    $scope.addBogie = function (bogie){
-        delete bogie.ID;
+    $scope.addBogie = function () {
+        if (bg.bogies.length == 0)
+            return;
+
+        var rnd = getRandomIntInclusive(0, bg.bogies.length - 1);
+        var bogie = bg.bogies[rnd];
+
         BogieService.Insert(bogie)
-            .success(function () {
-                getBogies();
+            .success(function (data) {
+                bg.bogies.push(data.entity);
             })
             .error(function (error) {
                 $scope.status = 'Unable to load data: ' + error.message;
             });
     };
 
-    $scope.editBogie = function (bogie){
-        bogie.BOGIE_NAME_TH = "thailand only";
+    $scope.editBogie = function (bogie) {
         BogieService.Update(bogie)
-            .success(function () {
-                getBogies();
+            .success(function (data) {
+                bogie.UPDATE_DATE = data.entity.UPDATE_DATE;
+                bogie.UPDATE_USER = data.entity.UPDATE_USER;
             })
             .error(function (error) {
                 $scope.status = 'Unable to load data: ' + error.message;
             });
     };
 
-    $scope.deleteBogie = function(bogie){
+    $scope.deleteBogie = function (bogie) {
         BogieService.Delete(bogie)
             .success(function () {
-                getBogies();
+                bg.bogies.splice(bg.bogies.indexOf(bogie), 1);
             })
             .error(function (error) {
                 $scope.status = 'Unable to load data: ' + error.message;

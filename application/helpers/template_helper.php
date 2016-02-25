@@ -47,8 +47,7 @@ function getHeaderTitle()
 
 function getDateNow()
 {
-    $ci = new ciHelper();
-    return $ci->date('Y-m-d H:i:s');
+    return date("Y-m-d H:i:s");
 }
 
 

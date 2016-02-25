@@ -1413,6 +1413,7 @@ abstract class REST_Controller extends CI_Controller {
      * @access protected
      * @return void
      */
+    /*
     protected function _parse_put()
     {
         if ($this->request->format)
@@ -1425,6 +1426,25 @@ abstract class REST_Controller extends CI_Controller {
            $this->_put_args = $this->input->input_stream();
         }
     }
+    */
+
+    protected function _parse_put()
+    {
+        // It might be a HTTP body
+        if ($this->request->format)
+        {
+            $this->request->body = file_get_contents('php://input');
+        }
+
+        // If no file type is provided, this is probably just arguments
+        else
+        {
+            //parse_str(file_get_contents('php://input'), $this->_put_args);
+            $this->_put_args = [];
+            array_push($this->_put_args, file_get_contents('php://input'));
+        }
+    }
+
 
     /**
      * Parse the HEAD request arguments

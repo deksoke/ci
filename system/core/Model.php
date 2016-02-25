@@ -84,8 +84,10 @@ interface iMy_CI_Model
 	public function GetData($filter_or_id);
 	public function GetDataById($id);
 	public function GetCount($filter = null);
+	public function GetInsertId();
+
 	public function Insert($entity);
-	public function Update($entity);
+	public function Update($entity, $condition_or_id);
 	public function Delete($condition_or_id);
 }
 
@@ -102,24 +104,30 @@ class My_CI_Model extends CI_Model implements iMy_CI_Model {
 		$this->entityColId = $entityColId;
 	}
 
-	public function GetData($filter = null)	{
-		if ($filter == null) {
+	public function GetData($filter = null)
+	{
+		if ($filter == null)
+		{
 			//nothing to do
-
-		} else if (is_array($filter)) {
+		}
+		else if (is_array($filter))
+		{
 			$this->db->where($filter);
-
-		} else {
+		}
+		else
+		{
 			$this->db->where($this->entityColId, $filter);
 		}
 		return $this->db->get($this->entityName)->result();
 	}
 
-	public function GetDataById($id) {
+	public function GetDataById($id)
+	{
 		return $this->db->where($this->entityColId, $id)->get($this->entityName)->row();
 	}
 
-	public function GetCount($filter = null){
+	public function GetCount($filter = null)
+	{
 		if ($filter != null)
 			$this->db->where($filter);
 
@@ -131,19 +139,37 @@ class My_CI_Model extends CI_Model implements iMy_CI_Model {
 		return $this->entityName;
 	}
 
-	public function Insert($entity)	{
+	public function GetInsertId()
+	{
+		return $this->db->insert_id();
+	}
+
+	public function Insert($entity)
+	{
 		$this->db->insert($this->entityName, $entity);
 	}
 
-	public function Update($entity) {
-		$this->db->where($this->entityColId, $entity->ID);
+	public function Update($entity, $condition)
+	{
+		if (is_array($condition))
+		{
+			$this->db->where($condition);
+		}
+		else
+		{
+			$this->db->where($this->entityColId, $condition);
+		}
 		$this->db->update($this->entityName, $entity);
 	}
 
-	public function Delete($condition)	{
-		if (is_array($condition)){
+	public function Delete($condition)
+	{
+		if (is_array($condition))
+		{
 			$this->db->where($condition);
-		} else {
+		}
+		else
+		{
 			$this->db->where($this->entityColId, $condition);
 		}
 		$this->db->delete($this->entityName);

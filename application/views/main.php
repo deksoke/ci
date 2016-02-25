@@ -88,29 +88,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </header>
     </div>
 
-    <div id="div-viewer" ng-controller="BogieController as b">
+    <div id="div-viewer" ng-controller="BogieController as b" ng-init="getBogieLists()">
         <div class="table-responsive">
-            <table class="table table-hover">
+            <button class="btn btn-success" ng-click="addBogie()" title="Add"><span
+                    class="glyphicon glyphicon-plus"></span></button>
+            <button class="btn btn-primary" ng-click="getBogieLists()" title="Reload Data"><span
+                    class="glyphicon glyphicon-repeat"></span></button>
+            <br/>
+            <table class="table table-hover table-bordered">
                 <tr>
                     <th>ID</th>
                     <th>Name (th)</th>
-                    <th>Name (en)</th>
-                    <th>Short Name (th)</th>
-                    <th>Short Name (en)</th>
-                    <th></th>
+                    <th>CREATE</th>
+                    <th>UPDATE</th>
                     <th></th>
                     <th></th>
                 </tr>
-                <tr ng-repeat="detail in b.bogies | orderBy:ID">
-                    <td><span>{{detail.ID}}</span></td>
+                <tr ng-repeat="detail in b.bogies | orderBy:'-CREATE_DATE'">
+                    <td><span>{{$index+1}}</span></td>
                     <td>{{detail.BOGIE_NAME_TH}}</td>
-                    <td>{{detail.BOGIE_NAME_EN}}</td>
-                    <td>{{detail.BOGIE_SHORT_NAME_TH}}</td>
-                    <td>{{detail.BOGIE_SHORT_NAME_EN}}</td>
-                    <td>
-                        <button class="btn btn-primary" ng-click="addBogie(detail)" title="Add"><span
-                                class="glyphicon glyphicon-inbox"></span></button>
-                    </td>
+                    <td>{{detail.CREATE_DATE}}</td>
+                    <td>{{detail.UPDATE_DATE}}</td>
                     <td>
                         <button class="btn btn-warning" ng-click="editBogie(detail)" title="Edit"><span
                                 class="glyphicon glyphicon-edit"></span></button>
