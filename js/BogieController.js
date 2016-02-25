@@ -22,7 +22,7 @@ app.controller('BogieController', function ($scope, BogieService) {
     $scope.addBogie = function (bogie){
         delete bogie.ID;
         BogieService.Insert(bogie)
-            .success(function (data) {
+            .success(function () {
                 getBogies();
             })
             .error(function (error) {

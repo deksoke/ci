@@ -131,7 +131,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script type="text/javascript" src="<?php echo base_url('libs/angular-resource/angular-resource.min.js'); ?>"></script>
 
     <script type="text/javascript" src="<?php echo base_url('js/script.js'); ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('js/main.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/app.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('js/services.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('js/BogieController.js'); ?>"></script>
 </body>
 </html>
