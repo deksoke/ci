@@ -50,13 +50,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-$route['api/user/(:num)'] = 'apis/user/get/$1';
-$route['api/member/(:num)'] = 'apis/member/get/$1';
-
 $route['default_controller'] = 'Welcome';
 $route['404_override'] = 'notfound';
 $route['translate_uri_dashes'] = FALSE;
-
 /*
 | -------------------------------------------------------------------------
 | Sample REST API Routes
@@ -65,8 +61,9 @@ $route['translate_uri_dashes'] = FALSE;
 $route['api/example/users/(:num)'] = 'apis/example/users/id/$1'; // Example 4
 $route['api/example/users/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'apis/example/users/id/$1/format/$3$4'; // Example 8
 
-$route['api/bogies'] = 'apis/bogies/bogies';
-$route['api/bogies/(:num)'] = 'apis/bogies/bogies/id/$1';
+
+$route['api/bogies'] = 'bogies/bogies';
+$route['api/bogies/(:num)'] = 'bogies/bogies/id/$1';
 
 $route['api/railtypes'] = 'railtypes/railtypes';
 $route['api/railtypes/(:num)'] = 'railtypes/railtypes/id/$1';

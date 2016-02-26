@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="RailApp">
+<head>
+    <title>Rail on the Road - AngularJS ver.</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Language" content="th">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"/>
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/paper.css"/>
+</head>
+<body>
+<div class="container">
+    <div id="div-header">
+        <div ng-include="'includes/nav.html'"></div>
+    </div>
+
+    <div ng-view></div>
+
+    <script type="text/javascript" src="libs/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="libs/angular/angular.min.js"></script>
+    <script type="text/javascript" src="libs/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="libs/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="app/services.js"></script>
+    <script type="text/javascript" src="app/BogieController.js"></script>
+</body>
+</html>

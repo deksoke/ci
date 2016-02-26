@@ -11,8 +11,7 @@ function SetMenuBarActive(){
          results.addClass('active');
       }
    } catch (e) {
-      console.log('initial menubar error!');
-      console.log(e);
+
    }
 }
 

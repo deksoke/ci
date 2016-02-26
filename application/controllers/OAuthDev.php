@@ -9,8 +9,8 @@ class OAuthDev extends CI_Controller
         $this->load->spark('oauth2/0.3.1');
 
         $provider = $this->oauth2->provider($provider, array(
-            'id' => 'your-client-id',
-            'secret' => 'your-client-secret',
+            'id' => '1041248565936432',
+            'secret' => 'a027939022a313e00dffec4dfe856bf5',
         ));
 
         if ( ! $this->input->get('code'))
