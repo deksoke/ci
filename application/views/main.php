@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="<?php echo base_url('css/style.css'); ?>"/>
     <link rel="stylesheet" href="<?php echo base_url('libs/bootstrap/dist/css/bootstrap.min.css'); ?>"/>
     <link rel="stylesheet" href="<?php echo base_url('css/paper.css'); ?>"/>
+    <link rel="stylesheet" href="<?php echo base_url('libs/ladda/dist/ladda-themeless.min.css'); ?>"/>
 </head>
 <body>
 <div class="container">
@@ -25,6 +26,15 @@
     <script type="text/javascript" src="<?php echo base_url('libs/angular-route/angular-route.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('libs/angular-resource/angular-resource.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('libs/angular-ui-router/release/angular-ui-router.min.js'); ?>"></script>
+
+    <script type="text/javascript" src="<?php echo base_url('libs/spin.js/spin.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('libs/angular-spinner/angular-spinner.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('libs/ladda/dist/ladda.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('libs/angular-ladda/dist/angular-ladda.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('libs/angular-strap/dist/angular-strap.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('libs/angular-strap/dist/angular-strap.tpl.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('libs/ngInfiniteScroll/build/ng-infinite-scroll.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('libs/angular-auto-validate/dist/jcs-auto-validate.min.js'); ?>"></script>
 
     <script type="text/javascript" src="<?php echo base_url('js/script.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('app/app.js'); ?>"></script>

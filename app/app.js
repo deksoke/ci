@@ -1,7 +1,16 @@
 /**
  * Created by Taywan_ka on 25/02/2016.
  */
-var app = angular.module('RailApp', ['ngRoute', 'ngResource', 'ui.router']);
+var app = angular.module('RailApp', [
+    'ngRoute', 
+    'ngResource', 
+    'ui.router',
+    'mgcrea.ngStrap',
+    'infinite-scroll',
+    'angularSpinner',
+    'angular-ladda',
+    'jcs-autoValidate'
+    ]);
 
 app.factory('httpRequestInterceptor', function () {
     return {
@@ -20,8 +29,14 @@ app.factory('httpRequestInterceptor', function () {
 });
 
 //config
-app.config(function ($routeProvider, $urlRouterProvider, $stateProvider) {
+app.config(function (laddaProvider, $resourceProvider, $httpProvider, $routeProvider, $urlRouterProvider, $stateProvider) {
     //$httpProvider.interceptors.push('httpRequestInterceptor');
+
+    $httpProvider.defaults.headers.common['Authorization'] = '';
+    $resourceProvider.defaults.stripTrailingSlashed = false;
+    laddaProvider.setOption({
+        style: 'expend-right'
+    });
 
     $routeProvider.
     when('/', {
