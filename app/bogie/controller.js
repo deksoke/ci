@@ -43,8 +43,4 @@ app.controller('BogieListController', ['$scope', '$modal', 'BogieService', funct
     $scope.loadMore = function () {
         $scope.Bogies.loadMore();
     };
-
-    $scope.view = function(bogieItem){
-        alert('click view');
-    }
 }]);

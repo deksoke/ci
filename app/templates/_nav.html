@@ -8,18 +8,18 @@
             </a >
         </div >
 
-        <div ui-view="search">
-        </div>
-
         <div class="collapse navbar-collapse" >
-            <ul class="nav navbar-nav navbar-right" >
+            <ul class="nav navbar-nav navbar-left" >
                 <li ui-sref-active="active">
-                    <a href="#">Search</a >
+                    <a ui-sref="railtypes"  >Rail Types</a >
                 </li >
                 <li ui-sref-active="active" >
                     <a ui-sref="bogies"  >Bogies</a >
                 </li >
             </ul >
+
+            <div ui-view="search">
+            </div>
         </div >
 
     </div >

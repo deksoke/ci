@@ -5,7 +5,7 @@
 >
 </div >
 <span>
-    <a ui-sref="bogies.create" class="btn btn-primary">Create</a>
+    <a ui-sref="railtypes.create" class="btn btn-primary">Create</a>
 </span>
 <div class="table-responsive">
     <table class="table table-hover">
@@ -17,28 +17,28 @@
             <th></th>
             <th></th>
         </tr>
-        <tr ng-repeat="bogie in Bogies.list">
+        <tr ng-repeat="railtype in RailTypes.list">
             <td><span>{{$index+1}}</span></td>
-            <td>{{bogie.BOGIE_NAME_TH}}</td>
-            <td>{{bogie.BOGIE_NAME_EN}}</td>
-            <td>{{bogie.CREATE_DATE | date:'shortdate'}}</td>
+            <td>{{r.RAILTYPE_NAME_TH}}</td>
+            <td>{{r.RAILTYPE_NAME_EN}}</td>
+            <td>{{r.CREATE_DATE | date}}</td>
             <td>
-                <a class="btn btn-warning" ui-sref="bogies.edit({id:bogie.ID})" title="Edit"><span
+                <a class="btn btn-warning" ui-sref="r.edit({id:r.ID})" title="Edit"><span
                         class="glyphicon glyphicon-edit"></span></a>
             </td>
             <td>
-                <button class="btn btn-danger" ng-click="Bogies.removeBogie(bogie)" title="Delete"><span
+                <button class="btn btn-danger" ng-click="RailTypes.removeRailType(r)" title="Delete"><span
                         class="glyphicon glyphicon-trash"></span></button>
             </td>
         </tr>
     </table>
 </div>
 
-<div ng-show="Bogies.list.length == 0 && !Bogies.isLoading" >
+<div ng-show="RailTypes.list.length == 0 && !RailTypes.isLoading" >
     <div class="alert alert-info" >
         <p class="text-center" >No results found for search term '{{ search }}'</p >
     </div >
 </div >
 
-<shared-spinner is-loading="Bogies.isLoading" message="Mooing..." >
+<shared-spinner is-loading="RailTypes.isLoading" message="Mooing..." >
 </shared-spinner >

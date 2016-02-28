@@ -1,48 +1,45 @@
 /**
  * Created by Taywan_ka on 25/02/2016.
  */
-app.factory("BogieFactory", ['$resource', function ($resource) {
-    return $resource("api/bogies/:id/", {id: '@ID'}, {
+app.factory("RailtypeFactory", ['$resource', function ($resource) {
+    return $resource("api/railtypes/:id/", {id: '@ID'}, {
         update: {
             method: 'PUT'
         }
     });
 }]);
 
-app.service('BogieService', ['BogieFactory', '$rootScope', '$q', '$timeout', 'ngToast', function (BogieFactory, $rootScope, $q, $timeout, ngToast) {
+app.service('RailtypeService', ['RailtypeFactory', '$rootScope', '$q', '$timeout', 'ngToast', function (RailtypeFactory, $rootScope, $q, $timeout, ngToast) {
 
     var self = {
         'page': 1,
         'hasMore': true,
         'isLoading': false,
         'isSaving': false,
-        'selectedBogie': null,
-        'bogieListOfRailType': [],
+        'selectedRailType': null,
         'list': [],
         'search': null,
         'ordering': 'ID',
-        'getBogie': function (id) {
-            console.log(id);
+        'getRailType': function (id) {
             for (var i = 0; i < self.list.length; i++) {
                 var obj = self.list[i];
-                if (parseInt(obj.ID) == id) {
+                if (parseInt(obj.ID) == id)
                     return obj;
-                }
             }
         },
         'doSearch': function () {
             self.hasMore = true;
             self.page = 1;
             self.list = [];
-            self.loadBogies();
+            self.loadRailtypes();
         },
         'doOrder': function () {
             self.hasMore = true;
             self.page = 1;
             self.list = [];
-            self.loadBogies();
+            self.loadRailtypes();
         },
-        'loadBogies': function () {
+        'loadRailtypes': function () {
             if (self.hasMore && !self.isLoading) {
                 self.isLoading = true;
 
@@ -52,15 +49,14 @@ app.service('BogieService', ['BogieFactory', '$rootScope', '$q', '$timeout', 'ng
                     'ordering': self.ordering
                 };
 
-                BogieFactory.get(params, function (data) {
-                    console.log(data);
-                    angular.forEach(data.results, function (bogie) {
-                        self.list.push(new BogieFactory(bogie));
+                RailtypeFactory.get(params, function (data) {
+                    angular.forEach(data.results, function (item) {
+                        self.list.push(new RailtypeFactory(item));
                     });
 
-                    if (!data.next) {
+                    if (!data.next)
                         self.hasMore = false;
-                    }
+
                     self.isLoading = false;
                 });
             }
@@ -68,33 +64,23 @@ app.service('BogieService', ['BogieFactory', '$rootScope', '$q', '$timeout', 'ng
         'loadMore': function () {
             if (self.hasMore && !self.isLoading) {
                 self.page += 1;
-                self.loadBogies();
+                self.loadRailtypes();
             }
         },
-        'getBogieById': function(_id){
+        'getRailTypeById': function (_id) {
             var params = {
-                'id' : _id
+                'id': _id
             };
-            BogieFactory.get(params, function(data){
-                self.selectedBogie = new BogieFactory(data);
+            RailtypeFactory.get(params, function (data) {
+                self.selectedRailType = new RailtypeFactory(data);
             });
         },
-        'getBogiesByRailTypeId':function(id, isAllBogie, isWithSelected){
-            var params = {
-                'id' : id,
-                'withselected': (isWithSelected == true ? 'Y' : 'N'),
-                'allbogie': (isAllBogie == true ? 'Y' : 'N')
-            };
-            BogieFactory.get(params, function(data){
-                self.bogieListOfRailType = data.results;
-            });
-        },
-        'createBogie': function (bogieItem) {
+        'createRailType': function (railtypeItem) {
             var d = $q.defer();
             self.isSaving = true;
-            BogieFactory.save(bogieItem).$promise.then(function () {
+            RailtypeFactory.save(railtypeItem).$promise.then(function () {
                 self.isSaving = false;
-                self.selectedBogie = null;
+                self.selectedRailType = null;
                 self.hasMore = true;
                 self.page = 1;
                 self.list = [];
@@ -103,7 +89,7 @@ app.service('BogieService', ['BogieFactory', '$rootScope', '$q', '$timeout', 'ng
                     content: 'ทำรายการสำเร็จ'
                 });
                 d.resolve();
-            }, function(error){
+            }, function (error) {
                 ngToast.error({
                     content: error.message
                 });
@@ -111,10 +97,10 @@ app.service('BogieService', ['BogieFactory', '$rootScope', '$q', '$timeout', 'ng
             });
             return d.promise;
         },
-        'updateBogie': function (bogieItem) {
+        'updateRailType': function (railtypeItem) {
             var d = $q.defer();
             self.isSaving = true;
-            bogieItem.$update()
+            railtypeItem.$update()
                 .then(function (data) {
                     self.isSaving = false;
                     ngToast.success({
@@ -122,7 +108,7 @@ app.service('BogieService', ['BogieFactory', '$rootScope', '$q', '$timeout', 'ng
                     });
                     self.doSearch();
                     d.resolve();
-                }, function(error){
+                }, function (error) {
                     ngToast.error({
                         content: error.message
                     });
@@ -130,48 +116,30 @@ app.service('BogieService', ['BogieFactory', '$rootScope', '$q', '$timeout', 'ng
                 });
             return d.promise;
         },
-        'removeBogie': function (bogieItem) {
-            console.log(bogieItem);
+        'removeRailType': function (railtypeItem) {
+            console.log(railtypeItem);
             var d = $q.defer();
             self.isDeleting = true;
-            bogieItem.$remove().then(function () {
+            railtypeItem.$remove().then(function () {
                 ngToast.success({
                     content: 'ลบรายการสำเร็จ'
                 });
                 self.isDeleting = false;
-                var index = self.list.indexOf(bogieItem);
+                var index = self.list.indexOf(railtypeItem);
                 self.list.splice(index, 1);
-                self.selectedBogie = null;
+                self.selectedRailType = null;
                 d.resolve()
-            }, function(error){
+            }, function (error) {
                 ngToast.error({
                     content: error.message
                 });
                 d.resolve();
             });
             return d.promise;
-        },
-        'watchFilters': function () {
-            $rootScope.$watch(function () {
-                return self.search;
-            }, function (newVal) {
-                if (angular.isDefined(newVal)) {
-                    self.doSearch();
-                }
-            });
-
-            $rootScope.$watch(function () {
-                return self.ordering;
-            }, function (newVal) {
-                if (angular.isDefined(newVal)) {
-                    self.doOrder();
-                }
-            });
         }
     };
 
-    self.loadBogies();
-    self.watchFilters();
+    self.loadRailtypes();
 
     return self;
 

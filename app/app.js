@@ -10,9 +10,9 @@ var app = angular.module('RailApp', [
     'angularSpinner',
     'angular-ladda',
     'jcs-autoValidate',
-    'toaster',
     'ngAnimate',
-    'ngNotificationsBar'
+    'ngToast',
+    'ngSanitize'
     ]);
 
 app.factory('httpRequestInterceptor', function () {
@@ -31,7 +31,7 @@ app.factory('httpRequestInterceptor', function () {
     };
 });
 
-app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $resourceProvider, laddaProvider, $datepickerProvider, notificationsConfigProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $resourceProvider, laddaProvider, $datepickerProvider, ngToastProvider) {
 
     $httpProvider.defaults.headers.common['Authorization'] = 'Token 20002cd74d5ce124ae219e739e18956614aab490';
     $resourceProvider.defaults.stripTrailingSlashed = false;
@@ -47,20 +47,13 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
         requireBase: true
     });
 
-    // auto hide
-    notificationsConfigProvider.setAutoHide(true);
+    //http://tamerayd.in/ngToast/#api
+    ngToastProvider.configure({
+        verticalPosition: 'bottom', //'top' or 'bottom'
+        horizontalPosition: 'right', //'right' or 'left'
+        maxNumber: 0 //Maximum number of toast messages to display. (0 = no limit) (number)
+    });
 
-    // delay before hide
-    notificationsConfigProvider.setHideDelay(3000);
-
-    // support HTML
-    notificationsConfigProvider.setAcceptHTML(false);
-
-    // Set an animation for hiding the notification
-    notificationsConfigProvider.setAutoHideAnimation('fadeOutNotifications');
-
-    // delay between animation and removing the nofitication
-    notificationsConfigProvider.setAutoHideAnimationDelay(500);
 
     $stateProvider
         .state('home', {
@@ -69,6 +62,33 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $htt
                 'main': {
                     templateUrl: 'app/home/templates/index.html',
                     controller: 'HomeController'
+                }
+            }
+        })
+        .state('railtypes', {
+            url: "/railtypes",
+            views: {
+                'main': {
+                    templateUrl: 'app/railtype/templates/list.html',
+                    controller: 'RailTypeListController'
+                }
+            }
+        })
+        .state('railtypes.create', {
+            url: "/create",
+            views: {
+                'main': {
+                    templateUrl: 'app/railtype/templates/_edit.html',
+                    controller: 'RailTypeCreateController'
+                }
+            }
+        })
+        .state('railtypes.edit', {
+            url: "/edit/:id",
+            views: {
+                'main': {
+                    templateUrl: 'app/railtype/templates/_edit.html',
+                    controller: 'RailTypeDetailController'
                 }
             }
         })

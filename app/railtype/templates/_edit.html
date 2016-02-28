@@ -1,0 +1,44 @@
+<div class="col-md-8 col-md-offset-2" >
+
+    <form class="form-horizontal"
+          ng-submit="save()"
+          novalidate >
+        <div class="panel panel-default" >
+            <div class="panel-heading" >
+                <div class="pull-left" >
+                    <button type="button"
+                            class="btn btn-default btn-sm"
+                            ui-sref="railtypes.list">
+                        <i class="fa fa-arrow-left"></i>
+                        <span style="margin-left:5px;">{{mode}}</span>
+                    </button >
+                </div >
+
+
+
+                <div class="pull-right" >
+                    <button class="btn btn-primary btn-sm"
+                            ladda="RailTypes.isSaving"
+                            type="submit"
+                            >
+                        <span ng-if="mode == 'Edit'" >Save</span >
+                        <span ng-if="mode == 'Create'" >Create</span >
+                    </button >
+                    <button class="btn btn-danger btn-sm"
+                            ladda="RailTypes.isDeleting"
+                            ng-if="mode == 'Edit'"
+                            ng-click="remove(RailTypes.selectedRailType)" >Delete
+                    </button >
+                </div >
+                <div class="clearfix" ></div >
+
+            </div >
+
+            <div class="panel-body" >
+
+                <ng-include src="'app/railtype/templates/_form.html'" ></ng-include >
+
+            </div >
+        </div >
+    </form >
+</div >

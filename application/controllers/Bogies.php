@@ -40,6 +40,27 @@ class Bogies extends REST_Controller
         $bogies = null;
 
         $id = $this->get('id');
+        $byrailtype = $this->get('byrailtype');
+        $allbogie = $this->get('allbogie');
+        $withselected = $this->get('withselected');
+
+        $ordering = $this->get('ordering');
+        $search = $this->get('search');
+        $page = $this->get('page');
+
+        //get all bogie work with this railtype
+        if ($byrailtype != null)
+        {
+            $bogies = $this->Bogie_Model->GetBogies_By_RailTypeId((int) $byrailtype, $allbogie == "Y", $withselected == "Y");
+
+            $dataItem = [
+                'next' => '',
+                'prev' => '',
+                'count' => sizeof($bogies),
+                'results' => $bogies
+            ];
+            $this->response($dataItem, REST_Controller::HTTP_OK); // OK (200)
+        }
 
         if ($id === NULL) {
             $bogies = $this->Bogie_Model->GetData();
