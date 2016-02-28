@@ -1,0 +1,44 @@
+<div class="row"
+     infinite-scroll="loadMore()"
+     infinite-scroll-immediate-check="false"
+     infinite-scroll-distance="1"
+>
+</div >
+<span>
+    <a ui-sref="bogies.create" class="btn btn-primary">Create</a>
+</span>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <tr>
+            <th>#</th>
+            <th>ชื่อไทย</th>
+            <th>CREATE</th>
+            <th>UPDATE</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="bogie in Bogies.list">
+            <td><span>{{$index+1}}</span></td>
+            <td>{{bogie.BOGIE_NAME_TH}}</td>
+            <td>{{bogie.BOGIE_NAME_EN}}</td>
+            <td>{{bogie.CREATE_DATE | date:'shortdate'}}</td>
+            <td>
+                <a class="btn btn-warning" ui-sref="bogies.edit({id:bogie.ID})" title="Edit"><span
+                        class="glyphicon glyphicon-edit"></span></a>
+            </td>
+            <td>
+                <button class="btn btn-danger" ng-click="Bogies.removeBogie(bogie)" title="Delete"><span
+                        class="glyphicon glyphicon-trash"></span></button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div ng-show="Bogies.persons.length == 0 && !Bogies.isLoading" >
+    <div class="alert alert-info" >
+        <p class="text-center" >No results found for search term '{{ search }}'</p >
+    </div >
+</div >
+
+<bogie-spinner is-loading="Bogies.isLoading"
+            message="Mooing..." ></bogie-spinner >

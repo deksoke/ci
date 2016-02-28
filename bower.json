@@ -1,7 +1,7 @@
 {
   "name": "ci",
   "description": "",
-  "main": "index.php",
+  "main": "application/views/index.php",
   "moduleType": [],
   "license": "MIT",
   "homepage": "",
@@ -10,7 +10,8 @@
     "node_modules",
     "libs",
     "test",
-    "tests"
+    "tests",
+    "gulp"
   ],
   "dependencies": {
     "angular": "~1.5.0",
@@ -22,6 +23,8 @@
     "ladda": "^0.9.8",
     "angular-spinner": "^0.8.1",
     "angular-ladda": "^0.3.4",
-    "angular-auto-validate": "^1.19.3"
+    "angular-auto-validate": "^1.19.3",
+    "AngularJS-Toaster": "angularjs-toaster#^1.2.0",
+    "gulp": "^3.9.1"
   }
 }

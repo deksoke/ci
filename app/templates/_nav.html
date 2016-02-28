@@ -1,0 +1,26 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" >
+    <div class="container" >
+        <div class="navbar-header" >
+            <a class="navbar-brand"
+               ui-sref="home"
+               ui-sref-opts="{reload: true}"
+            >Rail on the Road
+            </a >
+        </div >
+
+        <div ui-view="search">
+        </div>
+
+        <div class="collapse navbar-collapse" >
+            <ul class="nav navbar-nav navbar-right" >
+                <li ui-sref-active="active">
+                    <a href="#">Search</a >
+                </li >
+                <li ui-sref-active="active" >
+                    <a ui-sref="bogies"  >Bogies</a >
+                </li >
+            </ul >
+        </div >
+
+    </div >
+</nav >

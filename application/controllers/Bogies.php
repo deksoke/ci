@@ -41,11 +41,17 @@ class Bogies extends REST_Controller
 
         $id = $this->get('id');
 
-        if ($id === NULL)        {
+        if ($id === NULL) {
             $bogies = $this->Bogie_Model->GetData();
-            if ($bogies)            {
-                $this->response($bogies, REST_Controller::HTTP_OK); // OK (200)
-            }            else            {
+            $dataItem = [
+                'next' => '',
+                'prev' => '',
+                'count' => sizeof($bogies),
+                'results' => $bogies
+            ];
+            $this->response($dataItem, REST_Controller::HTTP_OK); // OK (200)
+
+            if ($bogies == null) {
                 $this->response([
                     'status' => FALSE,
                     'message' => 'No data were found'
@@ -53,7 +59,7 @@ class Bogies extends REST_Controller
             }
         }
 
-        $id = (int) $id;
+        $id = (int)$id;
         if ($id <= 0) {
             $message = [
                 'status' => false,
@@ -73,7 +79,8 @@ class Bogies extends REST_Controller
         }
     }
 
-    public function bogies_post() {
+    public function bogies_post()
+    {
 
         $entity = $this->_post_args;
         $entity['ID'] = NULL;
@@ -94,8 +101,9 @@ class Bogies extends REST_Controller
         $this->set_response($message, REST_Controller::HTTP_CREATED); // CREATED (201)
     }
 
-    public function bogies_put() {
-        $id = (int) $this->get('id');
+    public function bogies_put()
+    {
+        $id = (int)$this->get('id');
 
         if ($id <= 0) {
             $message = [
@@ -113,14 +121,15 @@ class Bogies extends REST_Controller
         $message = [
             'status' => true,
             'message' => 'data was updated',
-            'entity' => $entity
+            'result' => $entity
         ];
 
         $this->set_response($message, REST_Controller::HTTP_OK); // OK (200)
     }
 
-    public function bogies_delete() {
-        $id = (int) $this->get('id');
+    public function bogies_delete()
+    {
+        $id = (int)$this->get('id');
 
         if ($id <= 0) {
             $message = [

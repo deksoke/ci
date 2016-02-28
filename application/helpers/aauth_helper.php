@@ -8,8 +8,9 @@ function GetCurr_UserLogin()
 
 function GetCurr_UserLoginID()
 {
-    $ci = new ciHelper();
-    return $ci->get_ci()->aauth->get_user()->id;
+    //$ci = new ciHelper();
+    //return $ci->get_ci()->aauth->get_user()->id;
+    return 3;
 }
 
 ?>

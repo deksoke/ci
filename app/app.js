@@ -3,13 +3,16 @@
  */
 var app = angular.module('RailApp', [
     'ngRoute', 
-    'ngResource', 
+    'ngResource',
     'ui.router',
     'mgcrea.ngStrap',
     'infinite-scroll',
     'angularSpinner',
     'angular-ladda',
-    'jcs-autoValidate'
+    'jcs-autoValidate',
+    'toaster',
+    'ngAnimate',
+    'ngNotificationsBar'
     ]);
 
 app.factory('httpRequestInterceptor', function () {
@@ -28,39 +31,79 @@ app.factory('httpRequestInterceptor', function () {
     };
 });
 
-//config
-app.config(function (laddaProvider, $resourceProvider, $httpProvider, $routeProvider, $urlRouterProvider, $stateProvider) {
-    //$httpProvider.interceptors.push('httpRequestInterceptor');
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $resourceProvider, laddaProvider, $datepickerProvider, notificationsConfigProvider) {
 
-    $httpProvider.defaults.headers.common['Authorization'] = '';
+    $httpProvider.defaults.headers.common['Authorization'] = 'Token 20002cd74d5ce124ae219e739e18956614aab490';
     $resourceProvider.defaults.stripTrailingSlashed = false;
     laddaProvider.setOption({
         style: 'expend-right'
     });
-
-    $routeProvider.
-    when('/', {
-        templateUrl: 'partials/bogies.html',
-        controller: 'BogieController'
-    }).
-    when('/bogies', {
-        templateUrl: 'partials/bogies.html',
-        controller: 'BogieController'
-    }).
-    when('/bogies/new', {
-        templateUrl: 'partials/bogie-add.html',
-        controller: 'BogieController'
-    }).
-    when('/bogies/:id/edit', {
-        templateUrl: 'partials/bogie-edit.html',
-        controller: 'BogieController'
-    }).
-    when('/bogies/:id/view', {
-        templateUrl: 'partials/bogie-view.html',
-        controller: 'BogieController'
-    }).
-    otherwise({
-        redirectTo: '/'
+    angular.extend($datepickerProvider.defaults, {
+        dateFormat: 'd/M/yyyy',
+        autoclose: true
+    });
+    $locationProvider.html5Mode({
+        enabled: false,
+        requireBase: true
     });
 
+    // auto hide
+    notificationsConfigProvider.setAutoHide(true);
+
+    // delay before hide
+    notificationsConfigProvider.setHideDelay(3000);
+
+    // support HTML
+    notificationsConfigProvider.setAcceptHTML(false);
+
+    // Set an animation for hiding the notification
+    notificationsConfigProvider.setAutoHideAnimation('fadeOutNotifications');
+
+    // delay between animation and removing the nofitication
+    notificationsConfigProvider.setAutoHideAnimationDelay(500);
+
+    $stateProvider
+        .state('home', {
+            url: "/home",
+            views: {
+                'main': {
+                    templateUrl: 'app/home/templates/index.html',
+                    controller: 'HomeController'
+                }
+            }
+        })
+        .state('bogies', {
+            url: "/bogies",
+            views: {
+                'main': {
+                    templateUrl: 'app/bogie/templates/list.html',
+                    controller: 'BogieListController'
+                },
+                'search': {
+                    templateUrl: 'app/bogie/templates/_searchform.html',
+                    controller: 'BogieListController'
+                }
+            }
+        })
+        .state('bogies.create', {
+            url: "/create",
+            views: {
+                'main': {
+                    templateUrl: 'app/bogie/templates/_edit.html',
+                    controller: 'BogieCreateController'
+                }
+            }
+        })
+        .state('bogies.edit', {
+            url: "/edit/:id",
+            views: {
+                'main': {
+                    templateUrl: 'app/bogie/templates/_edit.html',
+                    controller: 'BogieDetailController'
+                }
+            }
+        })
+        ;
+
+    $urlRouterProvider.otherwise('/home');
 });
